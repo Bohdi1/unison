@@ -1,62 +1,413 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unison Beauty Salon</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Салон краси "Unison"</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #374151; /* text-gray-700 */
+      background-color: #fdfafe; /* Дуже світлий, майже білий з рожевим відтінком */
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+    }
+    /* Кастомний скролбар */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f3e8ff; /* very light purple */
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cdb4db; /* main-color from previous design */
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #b399cc; /* darker purple */
+    }
+    /* Плавна прокрутка */
+    html {
+      scroll-behavior: smooth;
+    }
+    /* Клас для активного посилання в навігації (приклад) */
+    .nav-active {
+      color: #a855f7; /* purple-600 */
+      font-weight: 600;
+    }
+    .hero-bg {
+      background-image: url('https://placehold.co/1920x1080/f3e8ff/6d28d9?text=Unison+Beauty+Salon'); /* Placeholder, замінити на реальне зображення */
+    }
+  </style>
+  <script>
+    // Конфігурація Tailwind (можна розширити кольори, шрифти тощо)
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'brand-purple': '#cdb4db',
+            'brand-pink': '#ffc8dd',
+            'brand-accent': '#ffafcc',
+            'brand-dark': '#333333',
+            'brand-light': '#fdfdfd',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
 </head>
-<body>
-    <header class="hero">
-        <div class="hero-content">
-            <h1>Unison Beauty Salon</h1>
-            <p>Ваш острівець краси та гармонії</p>
-            <a href="#booking" class="btn">Записатися онлайн</a>
+<body class="antialiased">
+
+  <header class="bg-brand-light shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <a href="#" class="text-3xl font-serif font-bold text-brand-purple">Unison</a>
+        <nav class="hidden md:flex space-x-6 items-center">
+          <a href="#about" class="text-gray-600 hover:text-brand-purple transition duration-300">Про нас</a>
+          <a href="#services" class="text-gray-600 hover:text-brand-purple transition duration-300">Послуги</a>
+          <a href="#gallery" class="text-gray-600 hover:text-brand-purple transition duration-300">Галерея</a>
+          <a href="#reviews" class="text-gray-600 hover:text-brand-purple transition duration-300">Відгуки</a>
+          <a href="#booking" class="bg-brand-pink hover:bg-opacity-80 text-brand-dark font-medium py-2 px-5 rounded-full transition duration-300 shadow-sm">Онлайн-запис</a>
+        </nav>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-600 hover:text-brand-purple focus:outline-none">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+          </button>
         </div>
-    </header>
+      </div>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden bg-brand-light shadow-lg">
+      <a href="#about" class="block py-3 px-4 text-gray-600 hover:bg-brand-pink hover:text-brand-dark transition duration-300">Про нас</a>
+      <a href="#services" class="block py-3 px-4 text-gray-600 hover:bg-brand-pink hover:text-brand-dark transition duration-300">Послуги</a>
+      <a href="#gallery" class="block py-3 px-4 text-gray-600 hover:bg-brand-pink hover:text-brand-dark transition duration-300">Галерея</a>
+      <a href="#reviews" class="block py-3 px-4 text-gray-600 hover:bg-brand-pink hover:text-brand-dark transition duration-300">Відгуки</a>
+      <a href="#booking" class="block py-3 px-4 bg-brand-pink text-brand-dark text-center font-medium hover:bg-opacity-80 transition duration-300 mx-4 my-2 rounded-full">Онлайн-запис</a>
+    </div>
+  </header>
 
-    <section id="about">
-        <h2>Про нас</h2>
-        <p>Ми створили простір, де кожна людина відчуває себе особливою. Наша команда — професіонали з досвідом та любов'ю до своєї справи.</p>
+  <main>
+    <section id="hero" class="hero-bg bg-cover bg-center text-white py-24 md:py-32 lg:py-40 relative">
+      <div class="absolute inset-0 bg-black opacity-30"></div>
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-serif font-bold mb-6 leading-tight">Салон краси "Unison"</h1>
+        <p class="text-lg sm:text-xl md:text-2xl font-sans mb-10 max-w-2xl mx-auto">Гармонія стилю, краси та душі – відкрийте для себе простір досконалості.</p>
+        <a href="#booking" class="bg-brand-pink hover:bg-opacity-80 text-brand-dark font-semibold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105 shadow-lg">Записатися зараз</a>
+      </div>
     </section>
 
-    <section id="services">
-        <h2>Послуги</h2>
-        <ul>
-            <li>Стрижка</li>
-            <li>Фарбування</li>
-            <li>Манікюр</li>
-            <li>Макіяж</li>
-        </ul>
+    <section id="about" class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-purple text-center mb-12">Про нас</h2>
+        <div class="max-w-3xl mx-auto text-center text-gray-600 text-lg leading-relaxed space-y-6">
+          <p>Ласкаво просимо до "Unison" – вашого оазису краси та релаксації! Ми створили цей простір, щоб кожна деталь сприяла вашому розслабленню, оновленню та підкреслювала вашу унікальність.</p>
+          <p>У "Unison" ми поєднуємо високий професіоналізм, найсучасніші технології та щиру любов до своєї справи. Наша команда – це досвідчені майстри, які постійно вдосконалюють свої навички, слідкують за останніми тенденціями у світі краси та використовують лише перевірену косметику преміум-класу.</p>
+          <p>Наша місія – не просто надавати послуги, а дарувати вам впевненість, гарний настрій та відчуття власної неперевершеності. Довіртеся нам, і ми допоможемо вам знайти гармонію між внутрішнім світом та зовнішнім виглядом.</p>
+        </div>
+      </div>
     </section>
 
-    <section id="gallery">
-        <h2>Галерея</h2>
-        <p>Фото наших робіт скоро з'являться тут.</p>
+    <section id="services" class="py-16 md:py-24 bg-pink-50">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-purple text-center mb-16">Наші Послуги та Ціни</h2>
+        
+        <div class="mb-12">
+          <h3 class="text-2xl font-serif font-semibold text-gray-700 mb-8 text-center md:text-left">Перукарські послуги</h3>
+          <div class="grid md:grid-cols-2 gap-x-12 gap-y-6 bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+            <div>
+              <h4 class="text-xl font-serif text-brand-pink mb-3">Фарбування однотонне</h4>
+              <ul class="space-y-1 text-gray-600">
+                <li class="flex justify-between"><span>1 Довжина (коротке волосся)</span> <span class="font-semibold">600 грн</span></li>
+                <li class="flex justify-between"><span>2 Довжина (до плечей)</span> <span class="font-semibold">700 грн</span></li>
+                <li class="flex justify-between"><span>3 Довжина (нижче плечей)</span> <span class="font-semibold">800 грн</span></li>
+                <li class="flex justify-between"><span>4 Довжина (довге волосся)</span> <span class="font-semibold">1000 грн</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="text-xl font-serif text-brand-pink mb-3">Тонування</h4>
+              <ul class="space-y-1 text-gray-600">
+                <li class="flex justify-between"><span>1 Довжина</span> <span class="font-semibold">400 грн</span></li>
+                <li class="flex justify-between"><span>2 Довжина</span> <span class="font-semibold">600 грн</span></li>
+                <li class="flex justify-between"><span>3 Довжина</span> <span class="font-semibold">800 грн</span></li>
+                <li class="flex justify-between"><span>4-5 Довжина</span> <span class="font-semibold">1000 грн</span></li>
+              </ul>
+            </div>
+            <div class="md:col-span-2 mt-4 space-y-2 text-gray-600">
+                <div class="flex justify-between items-center border-t pt-3">
+                    <h4 class="text-xl font-serif text-brand-pink">Мелірування</h4>
+                    <span class="font-semibold text-lg">від 1500 грн</span>
+                </div>
+                 <div class="flex justify-between items-center border-t pt-3">
+                    <h4 class="text-xl font-serif text-brand-pink">Кератинове вирівнювання</h4>
+                    <span class="font-semibold text-lg">від 1500 грн</span>
+                </div>
+                <div class="flex justify-between items-center border-t pt-3">
+                    <h4 class="text-xl font-serif text-brand-pink">Ботокс для волосся</h4>
+                    <span class="font-semibold text-lg">від 1500 грн</span>
+                </div>
+                <div class="flex justify-between items-center border-t pt-3">
+                    <h4 class="text-xl font-serif text-brand-pink">Біозавивка</h4>
+                    <span class="font-semibold text-lg">від 1500 грн</span>
+                </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-12">
+          <h3 class="text-2xl font-serif font-semibold text-gray-700 mb-8 text-center md:text-left">Контурна пластика губ</h3>
+          <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+            <ul class="space-y-2 text-gray-600 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
+              <li class="flex justify-between border-b pb-1"><span>Aileene 1,1ml</span> <span class="font-semibold">5000 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Alexa 1ml</span> <span class="font-semibold">5500 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Neuramis deep 1ml</span> <span class="font-semibold">4000 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Neuramis volume 1ml</span> <span class="font-semibold">4200 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Revolax deep 1ml</span> <span class="font-semibold">4500 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Sardenya deep 1ml</span> <span class="font-semibold">3500 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Chaeum premium 1ml</span> <span class="font-semibold">3500 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Phillex deep 1ml</span> <span class="font-semibold">5500 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Stylage</span> <span class="font-semibold">5500 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Juvederm</span> <span class="font-semibold">5500 грн</span></li>
+              <li class="flex justify-between border-b pb-1"><span>Belotero</span> <span class="font-semibold">5500 грн</span></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-serif font-semibold text-gray-700 mb-4">Нігтьовий сервіс</h3>
+                <p class="text-gray-600">Класичний та апаратний манікюр/педикюр, SPA-догляд, покриття гель-лаком, дизайн нігтів. Ціни уточнюйте у адміністратора.</p>
+                <img src="https://placehold.co/300x200/ffc8dd/333333?text=Нігтьовий+Сервіс" alt="Нігтьовий сервіс" class="mt-4 rounded-lg w-full h-40 object-cover">
+            </div>
+            <div class="bg-white p-6 sm:p-8 rounded-lg shadow-lg">
+                <h3 class="text-2xl font-serif font-semibold text-gray-700 mb-4">Косметологія</h3>
+                <p class="text-gray-600">Чистки обличчя, пілінги, доглядові процедури за типом шкіри, антивіковий догляд, масаж обличчя. Детальний прайс доступний у салоні.</p>
+                 <img src="https://placehold.co/300x200/cdb4db/ffffff?text=Косметологія" alt="Косметологія" class="mt-4 rounded-lg w-full h-40 object-cover">
+            </div>
+        </div>
+
+      </div>
     </section>
 
-    <section id="reviews">
-        <h2>Відгуки</h2>
-        <blockquote>“Дуже приємна атмосфера та якісне обслуговування!” – Аліна</blockquote>
+    <section id="gallery" class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-purple text-center mb-12">Галерея наших робіт</h2>
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          <a href="https://placehold.co/600x400/ffc8dd/333333?text=Робота+1" data-fancybox="gallery" class="block group rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+            <img src="https://placehold.co/600x400/ffc8dd/333333?text=Робота+1" alt="Приклад роботи салону 1" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+          </a>
+          <a href="https://placehold.co/600x400/cdb4db/ffffff?text=Робота+2" data-fancybox="gallery" class="block group rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+            <img src="https://placehold.co/600x400/cdb4db/ffffff?text=Робота+2" alt="Приклад роботи салону 2" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+          </a>
+          <a href="https://placehold.co/600x400/ffafcc/333333?text=Робота+3" data-fancybox="gallery" class="block group rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+            <img src="https://placehold.co/600x400/ffafcc/333333?text=Робота+3" alt="Приклад роботи салону 3" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+          </a>
+          <a href="https://placehold.co/600x400/e2b0ff/333333?text=Робота+4" data-fancybox="gallery" class="block group rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300">
+            <img src="https://placehold.co/600x400/e2b0ff/333333?text=Робота+4" alt="Приклад роботи салону 4" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+          </a>
+           </div>
+         <p class="text-center mt-8 text-gray-600">Для перегляду зображень у повноекранному режимі може знадобитися підключення бібліотеки типу FancyBox.</p>
+      </div>
     </section>
 
-    <section id="blog">
-        <h2>Блог</h2>
-        <p>Читайте наші поради по догляду за собою, новини та тренди.</p>
-    </section>
-
-    <section id="contacts">
-        <h2>Контакти</h2>
-        <p>Email: info@unison.com<br>Телефон: +380-00-000-0000</p>
-        <div id="booking">
-            <h3>Онлайн-запис</h3>
-            <p>Скоро буде доступна форма для запису онлайн.</p>
+    <section id="reviews" class="py-16 md:py-24 bg-purple-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-purple text-center mb-12">Що кажуть наші клієнти</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/60x60/ffc8dd/333333?text=МК" alt="Аватар клієнта" class="w-14 h-14 rounded-full mr-4 border-2 border-brand-pink">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Марина К.</h4>
+                            <p class="text-sm text-gray-500">Постійний клієнт</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic leading-relaxed">"Дівчата з Unison просто чарівниці! Завжди виходжу як нова. Атмосфера супер, майстри – професіонали. Рекомендую всім подругам!"</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/60x60/cdb4db/ffffff?text=ОВ" alt="Аватар клієнта" class="w-14 h-14 rounded-full mr-4 border-2 border-brand-purple">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Ольга В.</h4>
+                            <p class="text-sm text-gray-500">Задоволений клієнт</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic leading-relaxed">"Ідеальний сервіс, приємна атмосфера та результат, що перевершує очікування. Роблю тут манікюр вже рік – завжди бездоганно."</p>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 md:col-span-2 lg:col-span-1">
+                     <div class="flex items-center mb-4">
+                        <img src="https://placehold.co/60x60/ffafcc/333333?text=АП" alt="Аватар клієнта" class="w-14 h-14 rounded-full mr-4 border-2 border-brand-accent">
+                        <div>
+                            <h4 class="font-semibold text-lg text-gray-800">Андрій П.</h4>
+                            <p class="text-sm text-gray-500">Новий клієнт</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic leading-relaxed">"Записувався на стрижку. Майстер зрозуміла з півслова, що я хочу. Дуже задоволений результатом і сервісом. Тепер тільки сюди!"</p>
+                </div>
+            </div>
         </div>
     </section>
+    
+    <section id="booking" class="py-16 md:py-24 bg-white">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-brand-purple text-center mb-12">Онлайн-запис</h2>
+        <div class="max-w-xl mx-auto bg-pink-50 p-8 sm:p-10 rounded-xl shadow-xl">
+          <form id="bookingForm" class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Ваше ім'я</label>
+              <input type="text" id="name" name="name" placeholder="Наприклад, Іванна" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-brand-pink focus:border-brand-pink transition">
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Телефон</label>
+              <input type="tel" id="phone" name="phone" placeholder="+380 XX XXX XX XX" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-brand-pink focus:border-brand-pink transition">
+            </div>
+            <div>
+              <label for="service" class="block text-sm font-medium text-gray-700 mb-1">Оберіть послугу</label>
+              <select id="service" name="service" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-brand-pink focus:border-brand-pink transition bg-white">
+                <option value="" disabled selected>-- Оберіть зі списку --</option>
+                <option value="стрижка_укладка">Стрижка та укладка</option>
+                <option value="фарбування">Фарбування волосся</option>
+                <option value="манікюр_педикюр">Манікюр/Педикюр</option>
+                <option value="косметологія">Косметологія</option>
+                <option value="брови_вії">Брови та вії</option>
+                <option value="масаж">Масаж</option>
+                <option value="контурна_пластика">Контурна пластика губ</option>
+              </select>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Оберіть дату</label>
+                <input type="date" id="date" name="date" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-brand-pink focus:border-brand-pink transition">
+              </div>
+              <div>
+                <label for="time" class="block text-sm font-medium text-gray-700 mb-1">Оберіть час</label>
+                <input type="time" id="time" name="time" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-brand-pink focus:border-brand-pink transition">
+              </div>
+            </div>
+            <div>
+              <label for="comments" class="block text-sm font-medium text-gray-700 mb-1">Коментар (необов'язково)</label>
+              <textarea id="comments" name="comments" rows="3" placeholder="Ваші побажання або питання" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-brand-pink focus:border-brand-pink transition"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-brand-pink hover:bg-opacity-80 text-brand-dark font-semibold py-3 px-6 rounded-lg text-lg transition duration-300 shadow-md hover:shadow-lg transform hover:scale-105">Записатися</button>
+          </form>
+          <div id="formMessage" class="mt-6 text-center" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <footer>
-        <p>&copy; 2025 Unison Beauty Salon</p>
-    </footer>
+  <footer class="bg-gray-800 text-gray-300 py-12">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h4 class="text-xl font-serif font-semibold text-white mb-4">Unison</h4>
+          <p class="text-sm">Ваш простір краси та гармонії. Ми дбаємо про вашу досконалість кожного дня.</p>
+          <div class="mt-4 flex space-x-4">
+            <a href="#" class="text-gray-400 hover:text-brand-pink transition"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+            <a href="#" class="text-gray-400 hover:text-brand-pink transition"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.012-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.023.047 1.351.058 3.807.058h.468c2.456 0 2.784-.011 3.807-.058.975-.045 1.504-.207 1.857-.344.467-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.047-1.023.058-1.351.058-3.807v-.468c0-2.456-.011-2.784-.058-3.807-.045-.975-.207-1.504-.344-1.857-.182-.467-.399-.8-.748-1.15-.35-.35-.683-.566-1.15-.748-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" /></svg></a>
+            <a href="#" class="text-gray-400 hover:text-brand-pink transition"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-xl font-serif font-semibold text-white mb-4">Контакти</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="tel:+380000000000" class="hover:text-brand-pink transition">📞 +38 (000) 000-00-00</a></li>
+            <li><a href="mailto:info@unison.ua" class="hover:text-brand-pink transition">📧 info@unison.ua</a></li>
+            <li><p>� м. Ірпінь, вул. Уявна, 123</p></li>
+            <li><p>🕒 Пн-Сб: 9:00 - 20:00, Нд: вихідний</p></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xl font-serif font-semibold text-white mb-4">Ми на карті</h4>
+          <div class="w-full h-40 bg-gray-700 rounded-lg flex items-center justify-center text-gray-400">
+            <p>(Тут може бути вбудована карта Google)</p>
+            <img src="https://placehold.co/300x150/4A5568/A0AEC0?text=Карта+проїзду" alt="Карта проїзду" class="opacity-50 rounded-md">
+          </div>
+        </div>
+      </div>
+      <div class="border-t border-gray-700 pt-8 text-center text-sm">
+        <p>&copy; <span id="currentYear"></span> Unison Beauty Salon. Всі права захищено.</p>
+        <p>Розроблено з ❤️ <a href="https://github.com/BogdanDeveloper" target="_blank" rel="noopener noreferrer" class="hover:text-brand-pink transition">Богданом</a> та Луною</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Обробка мобільного меню
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+        // Зміна іконки бургер/хрестик
+        const iconPath = mobileMenuButton.querySelector('svg path');
+        if (mobileMenu.classList.contains('hidden')) {
+            iconPath.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+        } else {
+            iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+        }
+      });
+      // Закриття меню при кліку на посилання
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          mobileMenuButton.querySelector('svg path').setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+        });
+      });
+    }
+
+    // Встановлення поточного року в футері
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+    // Обробка форми онлайн-запису (приклад)
+    const bookingForm = document.getElementById('bookingForm');
+    const formMessage = document.getElementById('formMessage');
+    if (bookingForm && formMessage) {
+      bookingForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Тут могла б бути логіка відправки даних на сервер
+        // Наприклад, за допомогою fetch()
+        
+        formMessage.textContent = 'Дякуємо за запис! Ми зв\'яжемося з вами найближчим часом.';
+        formMessage.className = 'mt-6 text-center p-3 rounded-lg bg-green-100 text-green-700'; // Tailwind класи для повідомлення
+        formMessage.style.display = 'block';
+        
+        bookingForm.reset(); // Очищуємо форму
+        
+        setTimeout(() => {
+          formMessage.style.display = 'none';
+        }, 5000);
+      });
+    }
+    
+    // Плавна прокрутка для якірних посилань (якщо html { scroll-behavior: smooth; } не підтримується скрізь)
+    // Але оскільки ми використовуємо html { scroll-behavior: smooth; }, цей скрипт може бути зайвим для сучасних браузерів.
+    // document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    //   anchor.addEventListener('click', function (e) {
+    //     const hrefAttribute = this.getAttribute('href');
+    //     if (hrefAttribute.length > 1) { // Перевірка, чи це не просто "#"
+    //         const targetElement = document.querySelector(hrefAttribute);
+    //         if (targetElement) {
+    //             e.preventDefault();
+    //             targetElement.scrollIntoView({
+    //                 behavior: 'smooth'
+    //             });
+    //         }
+    //     }
+    //   });
+    // });
+
+  </script>
 </body>
 </html>
+�
