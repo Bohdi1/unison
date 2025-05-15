@@ -1,226 +1,188 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Інет - Твій сервіс</title>
-  <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-  <style>
-    /* --- ЗАГАЛЬНІ СТИЛІ --- */
-    :root {
-      --color-bg-light: #f9f9f9;
-      --color-bg-dark: #121212;
-      --color-text-light: #222;
-      --color-text-dark: #eee;
-      --primary: #007aff;
-      --accent: #ff6f61;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Салон Краси "Ламаємо стереотипи"</title>
+<style>
+  body {
+    margin:0; font-family: 'Arial', sans-serif; background:#fff;
+    color:#333; line-height:1.5;
+  }
+  header {
+    background:#ff4081; color:#fff; padding: 15px 20px;
+    display:flex; justify-content: space-between; align-items:center;
+  }
+  header .logo {
+    font-weight: bold; font-size: 1.5rem; letter-spacing: 2px;
+  }
+  nav a {
+    color:#fff; text-decoration:none; margin-left: 20px;
+    font-weight: 600;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  .hero {
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') center/cover no-repeat;
+    height: 70vh; display:flex; justify-content:center; align-items:center;
+    color:#fff; text-align:center; padding: 0 20px;
+    flex-direction: column;
+  }
+  .hero h1 {
+    font-size: 3rem; margin-bottom: 15px; text-shadow: 2px 2px 5px #000;
+  }
+  .hero button {
+    background:#ff4081; border:none; padding: 15px 30px;
+    font-size: 1.2rem; color:#fff; cursor:pointer;
+    border-radius: 25px; transition: background 0.3s ease;
+  }
+  .hero button:hover {
+    background:#e03570;
+  }
+  section {
+    max-width: 1100px; margin: 50px auto; padding: 0 20px;
+  }
+  h2 {
+    text-align:center; margin-bottom: 30px; font-weight: 700;
+    color:#ff4081;
+  }
+  .services {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 25px;
+  }
+  .service-card {
+    background: #f8f8f8; border-radius: 10px; box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+    width: 250px; padding: 20px; text-align: center;
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover {
+    transform: translateY(-10px);
+  }
+  .service-card img {
+    width: 100%; border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  .service-card h3 {
+    margin-bottom: 10px;
+    color: #ff4081;
+  }
+  .gallery {
+    display: grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap: 20px;
+  }
+  .gallery img {
+    width: 100%; border-radius: 10px;
+  }
+  .reviews {
+    max-width: 800px; margin: 0 auto;
+  }
+  .review {
+    background: #ff4081; color:#fff; padding: 20px;
+    border-radius: 15px; margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.2);
+  }
+  footer {
+    background:#222; color:#ddd; text-align:center; padding: 20px 10px;
+  }
+  form {
+    max-width: 500px; margin: 0 auto;
+    display: flex; flex-direction: column; gap: 15px;
+  }
+  input, textarea {
+    padding: 10px; border-radius: 8px; border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  button.submit-btn {
+    background: #ff4081; color:#fff; border:none; padding: 15px;
+    font-size: 1.1rem; cursor:pointer; border-radius: 25px;
+    transition: background 0.3s ease;
+  }
+  button.submit-btn:hover {
+    background: #e03570;
+  }
+  @media (max-width: 600px) {
+    .services {
+      flex-direction: column; align-items: center;
     }
-    body {
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: var(--color-bg-light);
-      color: var(--color-text-light);
-      transition: background-color 0.3s, color 0.3s;
-    }
-    body.dark {
-      background-color: var(--color-bg-dark);
-      color: var(--color-text-dark);
-    }
-    a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    header {
-      padding: 1rem 2rem;
-      display: flex; justify-content: space-between; align-items: center;
-      background-color: var(--primary);
-      color: white;
-    }
-    header h1 {
-      margin: 0;
-      font-weight: 700;
-    }
-    button.theme-toggle {
-      background: none;
-      border: 2px solid white;
-      border-radius: 25px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      padding: 0.25rem 1rem;
-      transition: background-color 0.3s, color 0.3s;
-    }
-    button.theme-toggle:hover {
-      background-color: white;
-      color: var(--primary);
-    }
-
-    /* --- ГОЛОВНИЙ БЛОК --- */
-    main {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    .hero {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .hero h2 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-    .hero p {
-      font-size: 1.25rem;
-      color: var(--accent);
-    }
-
-    /* --- КАРУСЕЛЬ --- */
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgb(0 0 0 / 0.1);
-      margin-bottom: 3rem;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-    .carousel-item {
-      min-width: 100%;
-      padding: 1rem;
-      box-sizing: border-box;
-      background: white;
-      color: black;
-      user-select: none;
-      text-align: center;
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-    body.dark .carousel-item {
-      background: #222;
-      color: white;
-    }
-    .carousel-buttons {
-      position: absolute;
-      top: 50%;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      transform: translateY(-50%);
-      padding: 0 1rem;
-      pointer-events: none;
-    }
-    .carousel-buttons button {
-      background-color: var(--primary);
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      pointer-events: all;
-      opacity: 0.8;
-      transition: opacity 0.3s;
-    }
-    .carousel-buttons button:hover {
-      opacity: 1;
-    }
-
-    /* --- ПІДВАЛ --- */
-    footer {
-      background: var(--primary);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    footer a {
-      color: #ffda79;
-      font-weight: 600;
-    }
-
-    @media (max-width: 768px) {
-      .hero h2 {
-        font-size: 2rem;
-      }
-      .carousel-item {
-        font-size: 1rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
-<body x-data="site()" :class="{dark: darkMode}" x-init="initTheme()">
-
+<body>
 <header>
-  <h1>Інет</h1>
-  <button class="theme-toggle" @click="toggleTheme()">
-    <span x-text="darkMode ? 'Світла тема' : 'Темна тема'"></span>
-  </button>
+  <div class="logo">BeautyLab</div>
+  <nav>
+    <a href="#services">Послуги</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#reviews">Відгуки</a>
+    <a href="#contact">Контакти</a>
+  </nav>
 </header>
 
-<main>
-  <section class="hero">
-    <h2>Твій сервіс з ремонту та продажу техніки</h2>
-    <p>Професіонали, яким можна довіряти. Швидко, якісно, надійно.</p>
-  </section>
+<section class="hero">
+  <h1>Прокачай свій стиль із BeautyLab</h1>
+  <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Записатися</button>
+</section>
 
-  <section class="carousel" x-data="carousel()" x-init="init()">
-    <div class="carousel-track" :style="`transform: translateX(-${currentIndex * 100}%)`">
-      <div class="carousel-item">Ремонт смартфонів будь-якої складності</div>
-      <div class="carousel-item">Продаж запчастин та аксесуарів</div>
-      <div class="carousel-item">Консультації та діагностика безкоштовно</div>
+<section id="services">
+  <h2>Наші Послуги</h2>
+  <div class="services">
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1542831371-d531d36971e6?auto=format&fit=crop&w=600&q=80" alt="Манікюр">
+      <h3>Манікюр</h3>
+      <p>Ідеальний догляд за нігтями, стильні дизайни та швидке виконання.</p>
     </div>
-    <div class="carousel-buttons">
-      <button @click="prev()">‹</button>
-      <button @click="next()">›</button>
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Стрижка">
+      <h3>Стрижка</h3>
+      <p>Класичні та модні стрижки для будь-якого типу волосся.</p>
     </div>
-  </section>
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" alt="Фарбування">
+      <h3>Фарбування</h3>
+      <p>Яскраві кольори, природні відтінки та безпечні фарби.</p>
+    </div>
+    <div class="service-card">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" alt="Косметологія">
+      <h3>Косметологія</h3>
+      <p>Професійний догляд за шкірою обличчя та тіла.</p>
+    </div>
+  </div>
+</section>
 
-</main>
+<section id="gallery">
+  <h2>Галерея</h2>
+  <div class="gallery">
+    <img src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=600&q=80" alt="Робота 1">
+    <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80" alt="Робота 2">
+    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" alt="Робота 3">
+    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80" alt="Робота 4">
+  </div>
+</section>
+
+<section id="reviews">
+  <h2>Відгуки клієнтів</h2>
+  <div class="reviews">
+    <div class="review">
+      "Кращий салон, де я коли-небудь була! Стрижка – бомба, манікюр бездоганний." – Олена
+    </div>
+    <div class="review">
+      "Дівчата просто профі! Після фарбування волосся я відчула себе новою людиною." – Марина
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Зв’язатися з нами</h2>
+  <form onsubmit="alert('Дякуємо за заявку! Ми зателефонуємо вам найближчим часом.'); return false;">
+    <input type="text" name="name" placeholder="Ваше ім'я" required />
+    <input type="tel" name="phone" placeholder="Ваш телефон" required />
+    <textarea name="message" placeholder="Ваше повідомлення" rows="4"></textarea>
+    <button type="submit" class="submit-btn">Надіслати</button>
+  </form>
+</section>
 
 <footer>
-  © 2025 Інет - Все права захищено. <br />
-  <a href="mailto:info@inet.com.ua">info@inet.com.ua</a>
+  &copy; 2025 BeautyLab - Твій стиль, твоя сила
 </footer>
-
-<script>
-  function site() {
-    return {
-      darkMode: false,
-      initTheme() {
-        // Автоматично ставимо темну/світлу тему за системою
-        this.darkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      },
-      toggleTheme() {
-        this.darkMode = !this.darkMode;
-      }
-    }
-  }
-
-  function carousel() {
-    return {
-      currentIndex: 0,
-      itemsCount: 3,
-      init() {
-        // Можна додати автоматичний слайд
-        this.interval = setInterval(() => {
-          this.next();
-        }, 4000);
-      },
-      prev() {
-        this.currentIndex = (this.currentIndex - 1 + this.itemsCount) % this.itemsCount;
-      },
-      next() {
-        this.currentIndex = (this.currentIndex + 1) % this.itemsCount;
-      },
-      interval: null
-    }
-  }
-</script>
-
 </body>
 </html>
