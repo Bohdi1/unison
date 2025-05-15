@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Салон краси Unison</title>
+  <style>
+    /* Загальні стилі */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #faf9f7;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #f3ece7;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header .logo {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #a87c5a;
+      letter-spacing: 2px;
+      cursor: default;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #7a6b5f;
+      margin-left: 25px;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #a87c5a;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      color: #8c7c6f;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #a87c5a;
+      padding-bottom: 8px;
+      max-width: 300px;
+    }
+
+    /* Онлайн-запис */
+    .booking form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      max-width: 600px;
+      background: #fff;
+      padding: 25px;
+      box-shadow: 0 0 10px rgba(168,124,90,0.2);
+      border-radius: 8px;
+    }
+
+    .booking input, .booking select, .booking button {
+      padding: 12px;
+      border: 1px solid #d4c9bd;
+      border-radius: 5px;
+      font-size: 1rem;
+      flex: 1 1 200px;
+    }
+
+    .booking button {
+      background: #a87c5a;
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.3s;
+      flex: 1 1 100%;
+      margin-top: 10px;
+    }
+
+    .booking button:hover {
+      background: #7a5a3a;
+    }
+
+    /* Галерея */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 15px;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      height: 140px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* Відгуки */
+    .reviews .review {
+      background: #fff;
+      padding: 20px;
+      border-left: 5px solid #a87c5a;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 6px rgba(168,124,90,0.15);
+    }
+
+    .review .author {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #6a5440;
+    }
+
+    /* Блог */
+    .blog article {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(168,124,90,0.1);
+    }
+
+    .blog article h3 {
+      margin-top: 0;
+      color: #7a6b5f;
+    }
+
+    .blog article p {
+      color: #5b5243;
+    }
+
+    /* Footer */
+    footer {
+      background: #f3ece7;
+      text-align: center;
+      padding: 20px;
+      color: #7a6b5f;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Unison</div>
+  <nav>
+    <a href="#booking">Записатися</a>
+    <a href="#gallery">Галерея</a>
+    <a href="#reviews">Відгуки</a>
+    <a href="#blog">Блог</a>
+    <a href="#contacts">Контакти</a>
+  </nav>
+</header>
+
+<main>
+  <section id="booking" class="booking">
+    <h2>Онлайн-запис</h2>
+    <form>
+      <input type="text" name="name" placeholder="Ваше ім’я" required />
+      <input type="tel" name="phone" placeholder="Телефон" required />
+      <select name="service" required>
+        <option value="" disabled selected>Обрати послугу</option>
+        <option>Стрижка</option>
+        <option>Манікюр</option>
+        <option>Макіяж</option>
+        <option>Догляд за шкірою</option>
+      </select>
+      <input type="date" name="date" required />
+      <button type="submit">Записатися</button>
+    </form>
+  </section>
+
+  <section id="gallery" class="gallery">
+    <h2>Галерея</h2>
+    <img src="https://via.placeholder.com/300x140?text=Стрижка" alt="Стрижка" />
+    <img src="https://via.placeholder.com/300x140?text=Манікюр" alt="Манікюр" />
+    <img src="https://via.placeholder.com/300x140?text=Макіяж" alt="Макіяж" />
+    <img src="https://via.placeholder.com/300x140?text=Догляд" alt="Догляд за шкірою" />
+  </section>
+
+  <section id="reviews" class="reviews">
+    <h2>Відгуки</h2>
+    <div class="review">
+      <div class="author">Олена</div>
+      <div class="text">Найкращий салон у місті! Майстри — профі своєї справи.</div>
+    </div>
+    <div class="review">
+      <div class="author">Ігор</div>
+      <div class="text">Задоволений сервісом і комфортом. Рекомендую!</div>
+    </div>
+  </section>
+
+  <section id="blog" class="blog">
+    <h2>Блог</h2>
+    <article>
+      <h3>Тренди весни 2025: що носити?</h3>
+      <p>Ми зібрали найгарячіші тренди цього сезону, щоб ви завжди були у тренді...</p>
+    </article>
+    <article>
+      <h3>Поради по догляду за шкірою</h3>
+      <p>Як зберегти молодість і сяйво обличчя — розповідаємо просто і зрозуміло.</p>
+    </article>
+  </section>
+</main>
+
+<footer id="contacts">
+  Контакти: м. Київ, вул. Красивих Людей, 7 | Тел: +380 99 123 4567 | Email: info@unison.ua
+</footer>
+
+</body>
+</html>
